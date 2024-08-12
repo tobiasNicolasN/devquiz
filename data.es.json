@@ -1,0 +1,93 @@
+[
+    {
+      "question": "¿Cuál es el propósito principal de TypeScript?",
+      "responses": [
+        {"response": "Aumentar la velocidad de las aplicaciones", "correct": false},
+        {"response": "Agregar tipado estático a JavaScript", "correct": true},
+        {"response": "Simplificar el manejo de promesas", "correct": false},
+        {"response": "Mejorar la compatibilidad con navegadores antiguos", "correct": false}
+      ]
+    },
+    {
+      "question": "¿Qué método se utiliza para filtrar elementos en un array en JavaScript?",
+      "responses": [
+        {"response": "map()", "correct": false},
+        {"response": "filter()", "correct": true},
+        {"response": "reduce()", "correct": false},
+        {"response": "forEach()", "correct": false}
+      ]
+    },
+    {
+      "question": "¿Cuál de las siguientes es una característica de React?",
+      "responses": [
+        {"response": "Data binding bidireccional", "correct": false},
+        {"response": "Virtual DOM", "correct": true},
+        {"response": "Herencia múltiple", "correct": false},
+        {"response": "Uso de templates en lugar de JSX", "correct": false}
+      ]
+    },
+    {
+      "question": "¿Qué es una promesa en JavaScript?",
+      "responses": [
+        {"response": "Un tipo de variable que no cambia", "correct": false},
+        {"response": "Una forma de manejar operaciones asíncronas", "correct": true},
+        {"response": "Una función que se ejecuta solo una vez", "correct": false},
+        {"response": "Un bucle que se repite indefinidamente", "correct": false}
+      ]
+    },
+    {
+      "question": "¿Qué hace el método reduce() en un array en JavaScript?",
+      "responses": [
+        {"response": "Filtra los elementos según una condición", "correct": false},
+        {"response": "Convierte todos los elementos a una cadena de texto", "correct": false},
+        {"response": "Aplica una función a cada elemento para reducir el array a un solo valor", "correct": true},
+        {"response": "Crea un nuevo array con los elementos transformados", "correct": false}
+      ]
+    },
+    {
+      "question": "¿Cuál es la sintaxis correcta para declarar una función anónima en JavaScript?",
+      "responses": [
+        {"response": "function() {}", "correct": true},
+        {"response": "function => {}", "correct": false},
+        {"response": "function: () => {}", "correct": false},
+        {"response": "() => function {}", "correct": false}
+      ]
+    },
+    {
+      "question": "¿Cuál es el propósito de 'useEffect' en React?",
+      "responses": [
+        {"response": "Manejar el estado local de un componente", "correct": false},
+        {"response": "Ejecutar efectos secundarios en componentes funcionales", "correct": true},
+        {"response": "Crear componentes basados en clases", "correct": false},
+        {"response": "Renderizar elementos de forma condicional", "correct": false}
+      ]
+    },
+    {
+      "question": "¿Qué herramienta es comúnmente utilizada para controlar versiones de código?",
+      "responses": [
+        {"response": "Webpack", "correct": false},
+        {"response": "Git", "correct": true},
+        {"response": "NPM", "correct": false},
+        {"response": "Docker", "correct": false}
+      ]
+    },
+    {
+      "question": "¿Qué es un componente en React?",
+      "responses": [
+        {"response": "Un archivo de estilo para la UI", "correct": false},
+        {"response": "Una función o clase que renderiza elementos de la UI", "correct": true},
+        {"response": "Un sistema de bases de datos", "correct": false},
+        {"response": "Un archivo de configuración de la aplicación", "correct": false}
+      ]
+    },
+    {
+      "question": "¿Qué significa 'Hoisting' en JavaScript?",
+      "responses": [
+        {"response": "Asignación automática de valores", "correct": false},
+        {"response": "El proceso por el cual las declaraciones de variables y funciones se mueven al principio de su contexto de ejecución", "correct": true},
+        {"response": "Compilación de código en tiempo de ejecución", "correct": false},
+        {"response": "Eliminación automática de variables no utilizadas", "correct": false}
+      ]
+    }
+  ]
+  
