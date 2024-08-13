@@ -1,93 +1,398 @@
 [
-    {
-      "question": "¿Cuál es el propósito principal de TypeScript?",
-      "responses": [
-        {"response": "Aumentar la velocidad de las aplicaciones", "correct": false},
-        {"response": "Agregar tipado estático a JavaScript", "correct": true},
-        {"response": "Simplificar el manejo de promesas", "correct": false},
-        {"response": "Mejorar la compatibilidad con navegadores antiguos", "correct": false}
-      ]
-    },
-    {
-      "question": "¿Qué método se utiliza para filtrar elementos en un array en JavaScript?",
-      "responses": [
-        {"response": "map()", "correct": false},
-        {"response": "filter()", "correct": true},
-        {"response": "reduce()", "correct": false},
-        {"response": "forEach()", "correct": false}
-      ]
-    },
-    {
-      "question": "¿Cuál de las siguientes es una característica de React?",
-      "responses": [
-        {"response": "Data binding bidireccional", "correct": false},
-        {"response": "Virtual DOM", "correct": true},
-        {"response": "Herencia múltiple", "correct": false},
-        {"response": "Uso de templates en lugar de JSX", "correct": false}
-      ]
-    },
-    {
-      "question": "¿Qué es una promesa en JavaScript?",
-      "responses": [
-        {"response": "Un tipo de variable que no cambia", "correct": false},
-        {"response": "Una forma de manejar operaciones asíncronas", "correct": true},
-        {"response": "Una función que se ejecuta solo una vez", "correct": false},
-        {"response": "Un bucle que se repite indefinidamente", "correct": false}
-      ]
-    },
-    {
-      "question": "¿Qué hace el método reduce() en un array en JavaScript?",
-      "responses": [
-        {"response": "Filtra los elementos según una condición", "correct": false},
-        {"response": "Convierte todos los elementos a una cadena de texto", "correct": false},
-        {"response": "Aplica una función a cada elemento para reducir el array a un solo valor", "correct": true},
-        {"response": "Crea un nuevo array con los elementos transformados", "correct": false}
-      ]
-    },
-    {
-      "question": "¿Cuál es la sintaxis correcta para declarar una función anónima en JavaScript?",
-      "responses": [
-        {"response": "function() {}", "correct": true},
-        {"response": "function => {}", "correct": false},
-        {"response": "function: () => {}", "correct": false},
-        {"response": "() => function {}", "correct": false}
-      ]
-    },
-    {
-      "question": "¿Cuál es el propósito de 'useEffect' en React?",
-      "responses": [
-        {"response": "Manejar el estado local de un componente", "correct": false},
-        {"response": "Ejecutar efectos secundarios en componentes funcionales", "correct": true},
-        {"response": "Crear componentes basados en clases", "correct": false},
-        {"response": "Renderizar elementos de forma condicional", "correct": false}
-      ]
-    },
-    {
-      "question": "¿Qué herramienta es comúnmente utilizada para controlar versiones de código?",
-      "responses": [
-        {"response": "Webpack", "correct": false},
-        {"response": "Git", "correct": true},
-        {"response": "NPM", "correct": false},
-        {"response": "Docker", "correct": false}
-      ]
-    },
-    {
-      "question": "¿Qué es un componente en React?",
-      "responses": [
-        {"response": "Un archivo de estilo para la UI", "correct": false},
-        {"response": "Una función o clase que renderiza elementos de la UI", "correct": true},
-        {"response": "Un sistema de bases de datos", "correct": false},
-        {"response": "Un archivo de configuración de la aplicación", "correct": false}
-      ]
-    },
-    {
-      "question": "¿Qué significa 'Hoisting' en JavaScript?",
-      "responses": [
-        {"response": "Asignación automática de valores", "correct": false},
-        {"response": "El proceso por el cual las declaraciones de variables y funciones se mueven al principio de su contexto de ejecución", "correct": true},
-        {"response": "Compilación de código en tiempo de ejecución", "correct": false},
-        {"response": "Eliminación automática de variables no utilizadas", "correct": false}
-      ]
-    }
-  ]
-  
+  {
+    "question": "¿Cuál de las siguientes es una característica clave de TypeScript?",
+    "responses": [
+      { "response": "Tipado dinámico", "correct": false },
+      { "response": "Tipado estático", "correct": true },
+      { "response": "No necesita compilación", "correct": false },
+      { "response": "Framework de pruebas incorporado", "correct": false }
+    ]
+  },
+  {
+    "question": "¿Qué representa el tipo 'any' en TypeScript?",
+    "responses": [
+      { "response": "Un número", "correct": false },
+      { "response": "Un booleano", "correct": false },
+      { "response": "Un tipo que puede ser cualquier cosa", "correct": true },
+      { "response": "Una cadena", "correct": false }
+    ]
+  },
+  {
+    "question": "¿Cómo se declara una variable con un tipo específico en TypeScript?",
+    "responses": [
+      { "response": "let miVar = 'Hola'", "correct": false },
+      { "response": "let miVar: string = 'Hola'", "correct": true },
+      { "response": "string miVar = 'Hola'", "correct": false },
+      { "response": "miVar: string = 'Hola'", "correct": false }
+    ]
+  },
+  {
+    "question": "¿Cuál de los siguientes es un tipo utilitario de TypeScript?",
+    "responses": [
+      { "response": "interface", "correct": false },
+      { "response": "string", "correct": false },
+      { "response": "module", "correct": false },
+      { "response": "Partial", "correct": true }
+    ]
+  },
+  {
+    "question": "¿Cuál es el propósito de las 'interfaces' en TypeScript?",
+    "responses": [
+      { "response": "Declarar una función", "correct": false },
+      { "response": "Definir la estructura de un objeto", "correct": true },
+      { "response": "Hacer cumplir la herencia de clases", "correct": false },
+      { "response": "Gestionar código asíncrono", "correct": false }
+    ]
+  },
+  {
+    "question": "En TypeScript, ¿qué palabra clave se utiliza para indicar que un miembro de una clase solo es accesible dentro de la clase?",
+    "responses": [
+      { "response": "public", "correct": false },
+      { "response": "protected", "correct": false },
+      { "response": "private", "correct": true },
+      { "response": "readonly", "correct": false }
+    ]
+  },
+  {
+    "question": "¿Qué es una tupla en TypeScript?",
+    "responses": [
+      {
+        "response": "Un tipo que permite múltiples tipos en un solo array",
+        "correct": true
+      },
+      { "response": "Un tipo de bucle", "correct": false },
+      { "response": "Un tipo especial de objeto", "correct": false },
+      { "response": "Una forma de manejar promesas", "correct": false }
+    ]
+  },
+  {
+    "question": "¿Cuál de los siguientes no es un tipo válido en TypeScript?",
+    "responses": [
+      { "response": "number", "correct": false },
+      { "response": "tuple", "correct": true },
+      { "response": "void", "correct": false },
+      { "response": "never", "correct": false }
+    ]
+  },
+  {
+    "question": "¿Cómo se manejan las excepciones en TypeScript?",
+    "responses": [
+      { "response": "Usando aserciones de tipo", "correct": false },
+      { "response": "Usando event listeners", "correct": false },
+      { "response": "Usando async/await", "correct": false },
+      { "response": "Usando bloques try y catch", "correct": true }
+    ]
+  },
+  {
+    "question": "¿Cuál de los siguientes es un beneficio de usar TypeScript?",
+    "responses": [
+      { "response": "Generación automática de UI", "correct": false },
+      { "response": "Ejecución de código más rápida", "correct": false },
+      { "response": "No se necesitan librerías externas", "correct": false },
+      {
+        "response": "Mejor legibilidad y mantenibilidad del código",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "En TypeScript, ¿qué hace el modificador 'readonly'?",
+    "responses": [
+      {
+        "response": "Hace que un miembro de la clase sea de solo lectura",
+        "correct": true
+      },
+      { "response": "Impide que una clase sea extendida", "correct": false },
+      { "response": "Permite solo tipos primitivos", "correct": false },
+      { "response": "Crea una clase singleton", "correct": false }
+    ]
+  },
+  {
+    "question": "¿Cuál es el propósito de los genéricos en TypeScript?",
+    "responses": [
+      {
+        "response": "Crear funciones y clases que funcionen con cualquier tipo de datos",
+        "correct": true
+      },
+      { "response": "Generar tipos de datos aleatorios", "correct": false },
+      {
+        "response": "Hacer cumplir tipos de datos estrictos",
+        "correct": false
+      },
+      { "response": "Compilar código TypeScript más rápido", "correct": false }
+    ]
+  },
+  {
+    "question": "¿Cuál de las siguientes es una característica de TypeScript que no está presente en JavaScript?",
+    "responses": [
+      { "response": "Funciones flecha", "correct": false },
+      { "response": "Encadenamiento opcional", "correct": false },
+      { "response": "Enums", "correct": true },
+      { "response": "Funciones asíncronas", "correct": false }
+    ]
+  },
+  {
+    "question": "¿Cuál de las siguientes opciones describe mejor la 'aserción de tipo' en TypeScript?",
+    "responses": [
+      {
+        "response": "Declarar una variable con múltiples tipos",
+        "correct": false
+      },
+      {
+        "response": "Crear un tipo a partir de un objeto existente",
+        "correct": false
+      },
+      {
+        "response": "Forzar que una variable sea tratada como un tipo específico",
+        "correct": true
+      },
+      { "response": "Convertir un tipo a una interfaz", "correct": false }
+    ]
+  },
+  {
+    "question": "¿Qué representa el tipo 'void' en TypeScript?",
+    "responses": [
+      { "response": "Un valor que nunca ocurre", "correct": false },
+      { "response": "Una variable con un tipo indefinido", "correct": false },
+      { "response": "Un valor nulo", "correct": false },
+      { "response": "Una función que no devuelve valor", "correct": true }
+    ]
+  },
+  {
+    "question": "¿Qué hook de React se usa para gestionar el estado en componentes funcionales?",
+    "responses": [
+      { "response": "useEffect", "correct": false },
+      { "response": "useRef", "correct": false },
+      { "response": "useReducer", "correct": false },
+      { "response": "useState", "correct": true }
+    ]
+  },
+  {
+    "question": "¿Qué significa JSX en React?",
+    "responses": [
+      { "response": "JavaScript XML", "correct": true },
+      { "response": "JavaScript Extension", "correct": false },
+      { "response": "Sintaxis JSON", "correct": false },
+      { "response": "JavaScript XHR", "correct": false }
+    ]
+  },
+  {
+    "question": "En Next.js, ¿qué método se utiliza para obtener datos en tiempo de compilación?",
+    "responses": [
+      { "response": "getServerSideProps", "correct": false },
+      { "response": "useEffect", "correct": false },
+      { "response": "getStaticProps", "correct": true },
+      { "response": "useState", "correct": false }
+    ]
+  },
+  {
+    "question": "¿Cuál de los siguientes es un beneficio del renderizado en el servidor en Next.js?",
+    "responses": [
+      { "response": "Peticiones API más rápidas", "correct": false },
+      { "response": "Mejor SEO", "correct": true },
+      { "response": "Gestión de estado más fácil", "correct": false },
+      { "response": "Menos peticiones HTTP", "correct": false }
+    ]
+  },
+  {
+    "question": "En HTML, ¿qué etiqueta se usa para definir el encabezado más grande?",
+    "responses": [
+      { "response": "<h1>", "correct": true },
+      { "response": "<h6>", "correct": false },
+      { "response": "<heading>", "correct": false },
+      { "response": "<title>", "correct": false }
+    ]
+  },
+  {
+    "question": "¿Cómo se centran los elementos usando Flexbox en CSS?",
+    "responses": [
+      { "response": "display: block;", "correct": false },
+      { "response": "text-align: center;", "correct": false },
+      { "response": "margin: auto;", "correct": false },
+      {
+        "response": "justify-content: center; align-items: center;",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "¿Qué propiedad de CSS se utiliza para hacer que un elemento flote a la izquierda?",
+    "responses": [
+      { "response": "position: relative;", "correct": false },
+      { "response": "align: left;", "correct": false },
+      { "response": "float: left;", "correct": true },
+      { "response": "display: inline;", "correct": false }
+    ]
+  },
+  {
+    "question": "En HTML, ¿qué atributo se utiliza para especificar una imagen en una etiqueta <img>?",
+    "responses": [
+      { "response": "href", "correct": false },
+      { "response": "link", "correct": false },
+      { "response": "src", "correct": true },
+      { "response": "img", "correct": false }
+    ]
+  },
+  {
+    "question": "¿Cuál es el propósito de la etiqueta <meta> en HTML?",
+    "responses": [
+      {
+        "response": "Proporcionar metadatos sobre el documento HTML",
+        "correct": true
+      },
+      { "response": "Incluir una imagen", "correct": false },
+      { "response": "Crear un enlace", "correct": false },
+      { "response": "Definir un script", "correct": false }
+    ]
+  },
+  {
+    "question": "En POO, ¿qué es una clase?",
+    "responses": [
+      { "response": "Una instancia de un objeto", "correct": false },
+      { "response": "Un tipo de variable", "correct": false },
+      { "response": "Una función", "correct": false },
+      { "response": "Una plantilla para crear objetos", "correct": true }
+    ]
+  },
+  {
+    "question": "En POO, ¿qué es la herencia?",
+    "responses": [
+      { "response": "Un tipo de función", "correct": false },
+      {
+        "response": "Un mecanismo donde una clase puede heredar propiedades y métodos de otra clase",
+        "correct": true
+      },
+      { "response": "La creación de instancias de clases", "correct": false },
+      { "response": "El proceso de encapsulamiento", "correct": false }
+    ]
+  },
+  {
+    "question": "¿Cuál es un principio fundamental de la POO?",
+    "responses": [
+      { "response": "Algoritmos", "correct": false },
+      { "response": "Funciones asíncronas", "correct": false },
+      { "response": "Encapsulamiento", "correct": true },
+      { "response": "Bucles", "correct": false }
+    ]
+  },
+  {
+    "question": "En POO, ¿qué es polimorfismo?",
+    "responses": [
+      {
+        "response": "La capacidad de una función o método para trabajar con más de un tipo de datos",
+        "correct": true
+      },
+      { "response": "El proceso de ocultar datos", "correct": false },
+      {
+        "response": "La creación de clases a partir de otras clases",
+        "correct": false
+      },
+      {
+        "response": "El proceso de iteración a través de un array",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "¿Cuál de los siguientes conceptos permite que una clase herede propiedades y métodos de otra clase?",
+    "responses": [
+      { "response": "Encapsulamiento", "correct": false },
+      { "response": "Herencia", "correct": true },
+      { "response": "Polimorfismo", "correct": false },
+      { "response": "Abstracción", "correct": false }
+    ]
+  },
+  {
+    "question": "En POO, ¿qué es la encapsulación?",
+    "responses": [
+      {
+        "response": "El proceso de heredar características de otra clase",
+        "correct": false
+      },
+      {
+        "response": "La capacidad de un objeto para tomar muchas formas",
+        "correct": false
+      },
+      {
+        "response": "El proceso de ocultar los detalles internos de un objeto",
+        "correct": true
+      },
+      { "response": "La creación de instancias de clases", "correct": false }
+    ]
+  },
+  {
+    "question": "¿Qué es un constructor en POO?",
+    "responses": [
+      {
+        "response": "Un método especial utilizado para inicializar objetos",
+        "correct": true
+      },
+      { "response": "Una función que destruye un objeto", "correct": false },
+      { "response": "Un tipo de variable", "correct": false },
+      { "response": "Una clase que no puede ser extendida", "correct": false }
+    ]
+  },
+  {
+    "question": "En POO, ¿qué significa la 'abstracción'?",
+    "responses": [
+      {
+        "response": "El proceso de ocultar los detalles de implementación y mostrar solo la funcionalidad esencial",
+        "correct": true
+      },
+      { "response": "Crear objetos a partir de clases", "correct": false },
+      {
+        "response": "La capacidad de un objeto para tomar muchas formas",
+        "correct": false
+      },
+      {
+        "response": "El proceso de iterar sobre una colección",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "¿Qué es un objeto en POO?",
+    "responses": [
+      { "response": "Una clase que no puede ser extendida", "correct": false },
+      { "response": "Una función dentro de una clase", "correct": false },
+      { "response": "Un tipo de dato primitivo", "correct": false },
+      { "response": "Una instancia de una clase", "correct": true }
+    ]
+  },
+  {
+    "question": "¿Cuál de los siguientes NO es un principio de la POO?",
+    "responses": [
+      { "response": "Polimorfismo", "correct": false },
+      { "response": "Herencia", "correct": false },
+      { "response": "Abstracción", "correct": false },
+      { "response": "Recursión", "correct": true }
+    ]
+  },
+  {
+    "question": "En JavaScript, ¿cuál es la salida de `typeof null`?",
+    "responses": [
+      { "response": "null", "correct": false },
+      { "response": "object", "correct": true },
+      { "response": "undefined", "correct": false },
+      { "response": "boolean", "correct": false }
+    ]
+  },
+  {
+    "question": "En JavaScript, ¿cuál es la diferencia entre `==` y `===`?",
+    "responses": [
+      {
+        "response": "`==` compara valores después de convertirlos a un tipo común, mientras que `===` compara tanto el valor como el tipo",
+        "correct": true
+      },
+      {
+        "response": "`==` compara valores y tipos, mientras que `===` compara solo valores",
+        "correct": false
+      },
+      {
+        "response": "`===` convierte valores a un tipo común antes de comparar",
+        "correct": false
+      },
+      { "response": "`==` es un operador de asignación", "correct": false }
+    ]
+  }
+]
