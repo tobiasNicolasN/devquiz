@@ -9,7 +9,8 @@ enum Language {
 function App() {
   const [language, setLanguage] = useState<string | undefined>(undefined);
   const [score, _setScore] = useState<number>(0);
-  const [playing, setPlaying] = useState<boolean>(false);
+  const [_playing, setPlaying] = useState<boolean>(false);
+  const [_response, _setResponse] = useState<boolean | undefined>(undefined)
   const lang = language === Language[0];
 
   if (language === undefined)
