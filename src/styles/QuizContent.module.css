@@ -33,6 +33,7 @@
   box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
   cursor: pointer;
   outline: none;
+  transition: 400ms all ease-in;
 }
 
 .responseCard:hover {
@@ -42,4 +43,12 @@
 
 .selected {
   border-color: #007bff;
+}
+
+.responseTrue {
+  background-color: #82ff82;
+}
+
+.responseFalse {
+  background: #ff5959;
 }

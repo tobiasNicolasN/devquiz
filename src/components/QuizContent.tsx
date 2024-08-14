@@ -8,6 +8,7 @@ function QuizContent({
   lang,
   setResponse,
   round,
+  showCorrect,
 }: IQuizContentProps) {
   const [selected, setSelected] = useState<number | undefined>(undefined);
   const [questionsUsed, setQuestionsUsed] = useState<number[]>([]);
@@ -50,6 +51,12 @@ function QuizContent({
                 <div
                   className={`${style.responseCard} ${
                     selected === index ? style.selected : ""
+                  } ${
+                    showCorrect === true
+                      ? res.correct === true
+                        ? style.responseTrue
+                        : style.responseFalse
+                      : ""
                   }`}
                   onClick={() => {
                     setSelected(index), setResponse(res.correct);

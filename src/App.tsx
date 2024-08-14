@@ -16,7 +16,8 @@ function App() {
   // Estado para manejo de las respuestas dadas por el jugador
   const [response, setResponse] = useState<boolean | undefined>(undefined);
   // Estado para manejo de puntos extra
-  const [extraPoints, setExtraPoints] = useState<boolean>(false);
+  const [extraPoints, setExtraPoints] = useState<number>(0);
+  const [showExtraPoints, setShowExtraPoints] = useState<boolean>(false);
   // Estado para manejo de rondas
   const [round, setRound] = useState<number>(0);
   const [timer, setTimer] = useState<number>(30);
@@ -50,16 +51,29 @@ function App() {
 
   const confirm = () => {
     setShowCorrect(true);
-    response === true ? (setScore(score + 100 + timer), setExtraPoints(true)) : "";
+    const newExtraPoints = 100 + timer;
+
+    setExtraPoints(newExtraPoints);
+
+    if (response) {
+      setShowExtraPoints(true);
+      setScore((prevScore) => prevScore + newExtraPoints);
+    }
+
     setTimeout(() => {
-      setExtraPoints(false);
-    }, 1500);
+      setShowExtraPoints(false);
+    }, 2500);
+
     setResponse(undefined);
+
     setTimeout(() => {
-      setShowCorrect(false);
-      setRound(round + 1);
       setTimer(30);
-    }, 5000);
+      setShowCorrect(false);
+    }, 2500);
+
+    setTimeout(() => {
+      setRound((prevRound) => prevRound + 1);
+    }, 3000);
   };
 
   return (
@@ -69,14 +83,20 @@ function App() {
           Dev<span>Quiz</span> Challenge
         </h1>
         <h2 className={style.score}>
-          {lang ? "Puntuación:" : "Score:"} <span>{score} </span>
-          <span>
-            {extraPoints ? `+${100 + timer}` : ""}
+          {lang ? "Puntuación: " : "Score: "}
+          <span className={style.extraPoints}>
+            {showExtraPoints ? `+ ${extraPoints}` : ""}
           </span>
+          <span>{score} </span>
         </h2>
       </header>
       <main>
-        <QuizContent round={round} lang={lang} setResponse={setResponse} />
+        <QuizContent
+          round={round}
+          lang={lang}
+          setResponse={setResponse}
+          showCorrect={showCorrect}
+        />
         <button
           disabled={showCorrect}
           onClick={() => confirm()}
@@ -91,7 +111,6 @@ function App() {
           onComplete={() => confirm()}
         />
       </main>
-      <footer></footer>
     </>
   );
 }

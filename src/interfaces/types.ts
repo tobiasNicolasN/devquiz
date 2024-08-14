@@ -14,6 +14,7 @@ export interface IQuizContentProps {
   lang: boolean;
   setResponse: React.Dispatch<React.SetStateAction<boolean | undefined>>;
   round: number;
+  showCorrect: boolean
 }
 
 export interface ITimeBar {

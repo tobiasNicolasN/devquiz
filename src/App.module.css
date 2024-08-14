@@ -99,3 +99,9 @@ main {
   color: white;
   cursor: pointer;
 }
+
+.extraPoints{
+  position: absolute;
+  margin-top: 20px;
+  translate: -18.5px;
+}
