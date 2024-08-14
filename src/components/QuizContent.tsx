@@ -4,23 +4,28 @@ import dataEs from "../../data.es.json";
 import dataEn from "../../data.en.json";
 import { useEffect, useState } from "react";
 
-function QuizContent({ lang, setResponse }: IQuizContentProps) {
+function QuizContent({
+  lang,
+  setResponse,
+  round,
+}: IQuizContentProps) {
   const [selected, setSelected] = useState<number | undefined>(undefined);
   const [questionsUsed, setQuestionsUsed] = useState<number[]>([]);
   const [question, setQuestion] = useState<number>();
   // const [changeAnimation, setChangeAnimation] = useState<boolean>(false);
   const data: IQuiz[] = lang ? dataEs : dataEn;
-  
+
   // Función para generar un número aleatorio dentro del rango dado
   const randomNumber = (max: number) => {
     return Math.floor(Math.random() * max + 1);
   };
-  
+
   // Setea una pregunta random
   useEffect(() => {
-    if(data.length > 0){
-    const randomIndex = randomNumber(data.length - 1)
-    setQuestion(randomIndex)}
+    if (data.length > 0) {
+      const randomIndex = randomNumber(data.length - 1);
+      setQuestion(randomIndex);
+    }
   }, [data]);
 
   // Cuando se responde, setea una pregunta random que no haya sido utilizada previamente
@@ -31,11 +36,12 @@ function QuizContent({ lang, setResponse }: IQuizContentProps) {
     }
     setQuestionsUsed((prevQuestionsUsed) => [...prevQuestionsUsed, i]);
     setQuestion(i);
-  },[]);
+    setSelected(undefined);
+  }, [round]);
 
   return (
     <div className={style.quizContainer}>
-      { question !== undefined ?
+      {question !== undefined ? (
         <>
           <p className={style.question}>{data[question].question}</p>
           <div className={style.responsesContainer}>
@@ -55,8 +61,10 @@ function QuizContent({ lang, setResponse }: IQuizContentProps) {
               );
             })}
           </div>
-        </> : ""
-      }
+        </>
+      ) : (
+        ""
+      )}
     </div>
   );
 }
