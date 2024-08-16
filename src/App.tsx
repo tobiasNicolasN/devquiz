@@ -2,79 +2,77 @@ import style from "./App.module.css";
 import { useState } from "react";
 import QuizContent from "./components/QuizContent";
 import TimeBar from "./components/TimeBar";
-
-enum Language {
-  spanish,
-  english,
-}
+import { GameState, Language } from "./interfaces/types";
+import LangButtons from "./components/LangButtons";
 
 function App() {
-  // Estado para manejo del lenguaje
-  const [language, setLanguage] = useState<string | undefined>(undefined);
-  // Estado para manejo de la puntuación
+  const [game, setGame] = useState<string>(GameState[0]);
+  const [language, setLanguage] = useState<string>(Language[0]);
   const [score, setScore] = useState<number>(0);
-  // Estado para manejo de las respuestas dadas por el jugador
   const [response, setResponse] = useState<boolean | undefined>(undefined);
-  // Estado para manejo de puntos extra
   const [extraPoints, setExtraPoints] = useState<number>(0);
   const [showExtraPoints, setShowExtraPoints] = useState<boolean>(false);
-  // Estado para manejo de rondas
+  const [visible, setVisible] = useState(false);
   const [round, setRound] = useState<number>(0);
   const [timer, setTimer] = useState<number>(30);
   const [showCorrect, setShowCorrect] = useState<boolean>(false);
 
   const lang = language === Language[0];
 
-  // Se rendizan los buttons de seleccion de idioma cuando este es undefined
-  if (language === undefined)
-    return (
-      <header>
-        <h1 className={style.title}>
-          Dev<span>Quiz</span> Challenge
-        </h1>
-        <div className={style.selectLanguage}>
-          <button
-            className={style.languageButton}
-            onClick={() => setLanguage(Language[0])}
-          >
-            Comenzar
-          </button>
-          <button
-            className={style.languageButton}
-            onClick={() => setLanguage(Language[1])}
-          >
-            Start
-          </button>
-        </div>
-      </header>
-    );
-
   const confirm = () => {
     setShowCorrect(true);
-    const newExtraPoints = 100 + timer;
 
+    const newExtraPoints = 100 + timer;
     setExtraPoints(newExtraPoints);
 
     if (response) {
+      setVisible(true);
       setShowExtraPoints(true);
       setScore((prevScore) => prevScore + newExtraPoints);
     }
 
+    setResponse(undefined);
+  };
+
+  const nextQuestion = () => {
+    setVisible(false);
+
     setTimeout(() => {
       setShowExtraPoints(false);
-    }, 2500);
-
-    setResponse(undefined);
-
-    setTimeout(() => {
       setTimer(30);
       setShowCorrect(false);
-    }, 2500);
+    }, 300);
 
     setTimeout(() => {
       setRound((prevRound) => prevRound + 1);
-    }, 3000);
+    }, 500);
   };
+
+  // Se rendizan los buttons de seleccion de idioma cuando este es undefined
+  if (game === GameState[0])
+    return (
+      <>
+        <header>
+          <h1 className={style.title}>
+            Dev<span>Quiz</span> Challenge
+          </h1>
+          <main>
+            <p className={style.textIntro}>
+              {lang
+                ? "Poné a prueba tus conocimientos en desarrollo web con este quiz interactivo. Responde preguntas sobre TypeScript, JavaScript, React, HTML, CSS y más. ¡Desafiá tu mente y mejorá tus habilidades mientras te divertís!"
+                : "Test your web development knowledge with this interactive quiz. Answer questions on TypeScript, JavaScript, React, HTML, CSS, and more. Challenge your mind and improve your skills while having fun!"}
+            </p>
+            <LangButtons lang={lang} setLanguage={setLanguage} />
+            <button
+              className={style.startButton}
+              onClick={() => setGame(GameState[1])}
+            >
+              {lang ? "Comenzar" : "Start"}
+            </button>
+          </main>
+        </header>
+      </>
+    );
 
   return (
     <>
@@ -84,7 +82,11 @@ function App() {
         </h1>
         <h2 className={style.score}>
           {lang ? "Puntuación: " : "Score: "}
-          <span className={style.extraPoints}>
+          <span
+            className={`${style.extraPoints} ${
+              visible ? style.showExtraPoints : ""
+            }`}
+          >
             {showExtraPoints ? `+ ${extraPoints}` : ""}
           </span>
           <span>{score} </span>
@@ -97,13 +99,18 @@ function App() {
           setResponse={setResponse}
           showCorrect={showCorrect}
         />
-        <button
-          disabled={showCorrect}
-          onClick={() => confirm()}
-          className={style.confirmButton}
-        >
-          {lang ? "Confirmar y Continuar" : "Confirm and Continue"}
-        </button>
+        {showCorrect ? (
+          <button
+            className={style.confirmButton}
+            onClick={() => nextQuestion()}
+          >
+            {lang ? "Siguiente Pregunta" : "Next Question"}
+          </button>
+        ) : (
+          <button onClick={() => confirm()} className={style.confirmButton}>
+            {lang ? "Confirmar y Continuar" : "Confirm and Continue"}
+          </button>
+        )}
         <TimeBar
           showCorrect={showCorrect}
           duration={timer}

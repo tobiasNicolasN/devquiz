@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import styles from "../styles/TimeBar.module.css";
-import { ITimeBar } from "../interfaces/types";
+import { ITimeBarProps } from "../interfaces/types";
 
 const TimerBar = ({
   showCorrect,
   duration,
   setTimer,
   onComplete,
-}: ITimeBar) => {
+}: ITimeBarProps) => {
   useEffect(() => {
     if (!showCorrect) {
       if (duration <= 0) {

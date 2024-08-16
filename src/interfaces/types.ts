@@ -1,5 +1,16 @@
 import { Dispatch, SetStateAction } from "react";
 
+export enum Language {
+  spanish,
+  english,
+}
+
+export enum GameState {
+  BeforePlaying,
+  Playing,
+  AfterPlaying,
+}
+
 export interface IQuiz {
   question: string;
   responses: Response[];
@@ -12,14 +23,19 @@ export interface Response {
 
 export interface IQuizContentProps {
   lang: boolean;
-  setResponse: React.Dispatch<React.SetStateAction<boolean | undefined>>;
+  setResponse: Dispatch<SetStateAction<boolean | undefined>>;
   round: number;
-  showCorrect: boolean
+  showCorrect: boolean;
 }
 
-export interface ITimeBar {
+export interface ITimeBarProps {
   duration: number;
   onComplete?: () => void;
   setTimer: Dispatch<SetStateAction<number>>;
   showCorrect: boolean;
+}
+
+export interface ILangButtonsProps {
+  lang: boolean;
+  setLanguage: Dispatch<SetStateAction<string>>;
 }
