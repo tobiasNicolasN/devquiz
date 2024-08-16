@@ -23,7 +23,16 @@ const TimerBar = ({
     }
   }, [duration, showCorrect]);
 
-  const percentage = (duration / 30) * 100;
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setTimer((prev) => prev - 1);
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [duration]);
+
+  const barDuration = showCorrect ? 10 : 30;
+  const percentage = (duration / barDuration) * 100;
 
   return (
     <div className={styles.container}>

@@ -13,7 +13,7 @@ function App() {
   const [extraPoints, setExtraPoints] = useState<number>(0);
   const [showExtraPoints, setShowExtraPoints] = useState<boolean>(false);
   const [visible, setVisible] = useState(false);
-  const [round, setRound] = useState<number>(0);
+  const [round, setRound] = useState<number>(1);
   const [timer, setTimer] = useState<number>(30);
   const [showCorrect, setShowCorrect] = useState<boolean>(false);
 
@@ -21,6 +21,7 @@ function App() {
 
   const confirm = () => {
     setShowCorrect(true);
+    setTimer(10)
 
     const newExtraPoints = 100 + timer;
     setExtraPoints(newExtraPoints);
@@ -32,6 +33,20 @@ function App() {
     }
 
     setResponse(undefined);
+
+    setTimeout(() => {
+      setVisible(false);
+    }, 9400);
+
+    setTimeout(() => {
+      setShowExtraPoints(false);
+      setShowCorrect(false);
+    }, 9700);
+    
+    setTimeout(() => {
+      setTimer(30);
+      setRound((prevRound) => prevRound + 1);
+    }, 10000);
   };
 
   const nextQuestion = () => {
@@ -74,52 +89,68 @@ function App() {
       </>
     );
 
-  return (
+  if (game === GameState[1])
+    return (
+      <>
+        <header>
+          <h1 className={style.title}>
+            Dev<span>Quiz</span> Challenge
+          </h1>
+          <h2 className={style.score}>
+            {round}/7 {lang ? "Puntuación: " : "Score: "}
+            <span
+              className={`${style.extraPoints} ${
+                visible ? style.showExtraPoints : ""
+              }`}
+            >
+              {showExtraPoints ? `+ ${extraPoints}` : ""}
+            </span>
+            <span>{score}</span>
+          </h2>
+        </header>
+        <main>
+          <QuizContent
+            round={round}
+            lang={lang}
+            setResponse={setResponse}
+            showCorrect={showCorrect}
+          />
+
+          {showCorrect ? (
+            <button
+              className={style.confirmButton}
+              onClick={() => nextQuestion()}
+            >
+              {lang ? "Siguiente Pregunta" : "Next Question"}
+            </button>
+          ) : (
+            <button onClick={() => confirm()} className={style.confirmButton}>
+              {lang ? "Confirmar y Continuar" : "Confirm and Continue"}
+            </button>
+          )}
+          <TimeBar
+            showCorrect={showCorrect}
+            duration={timer}
+            setTimer={setTimer}
+            onComplete={() => confirm()}
+          />
+        </main>
+      </>
+    );
+
+    if(game === GameState[2])
+      return (
     <>
-      <header>
-        <h1 className={style.title}>
-          Dev<span>Quiz</span> Challenge
-        </h1>
-        <h2 className={style.score}>
-          {lang ? "Puntuación: " : "Score: "}
-          <span
-            className={`${style.extraPoints} ${
-              visible ? style.showExtraPoints : ""
-            }`}
-          >
-            {showExtraPoints ? `+ ${extraPoints}` : ""}
-          </span>
-          <span>{score} </span>
-        </h2>
-      </header>
-      <main>
-        <QuizContent
-          round={round}
-          lang={lang}
-          setResponse={setResponse}
-          showCorrect={showCorrect}
-        />
-        {showCorrect ? (
-          <button
-            className={style.confirmButton}
-            onClick={() => nextQuestion()}
-          >
-            {lang ? "Siguiente Pregunta" : "Next Question"}
-          </button>
-        ) : (
-          <button onClick={() => confirm()} className={style.confirmButton}>
-            {lang ? "Confirmar y Continuar" : "Confirm and Continue"}
-          </button>
-        )}
-        <TimeBar
-          showCorrect={showCorrect}
-          duration={timer}
-          setTimer={setTimer}
-          onComplete={() => confirm()}
-        />
-      </main>
+    <header>
+    <h1 className={style.title}>
+            Dev<span>Quiz</span> Challenge
+          </h1>
+    </header>
+    <main>
+
+    </main>
     </>
-  );
+      )
 }
 
 export default App;
