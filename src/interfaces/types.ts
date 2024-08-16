@@ -30,7 +30,8 @@ export interface IQuizContentProps {
 
 export interface ITimeBarProps {
   duration: number;
-  onComplete?: () => void;
+  confirm: () => void;
+  nextQuestion: () => void
   setTimer: Dispatch<SetStateAction<number>>;
   showCorrect: boolean;
 }

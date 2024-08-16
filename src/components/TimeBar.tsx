@@ -6,12 +6,12 @@ const TimerBar = ({
   showCorrect,
   duration,
   setTimer,
-  onComplete,
+  confirm,
 }: ITimeBarProps) => {
   useEffect(() => {
     if (!showCorrect) {
       if (duration <= 0) {
-        if (onComplete) onComplete();
+        if (confirm) confirm();
         return;
       }
 

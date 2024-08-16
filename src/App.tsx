@@ -4,6 +4,7 @@ import QuizContent from "./components/QuizContent";
 import TimeBar from "./components/TimeBar";
 import { GameState, Language } from "./interfaces/types";
 import LangButtons from "./components/LangButtons";
+import Form from "./components/Form";
 
 function App() {
   const [game, setGame] = useState<string>(GameState[0]);
@@ -21,8 +22,7 @@ function App() {
 
   const confirm = () => {
     setShowCorrect(true);
-    setTimer(10)
-
+    setTimer(10);
     const newExtraPoints = 100 + timer;
     setExtraPoints(newExtraPoints);
 
@@ -33,35 +33,29 @@ function App() {
     }
 
     setResponse(undefined);
-
-    setTimeout(() => {
-      setVisible(false);
-    }, 9400);
-
-    setTimeout(() => {
-      setShowExtraPoints(false);
-      setShowCorrect(false);
-    }, 9700);
-    
-    setTimeout(() => {
-      setTimer(30);
-      setRound((prevRound) => prevRound + 1);
-    }, 10000);
   };
 
   const nextQuestion = () => {
+    setTimer(30);
     setVisible(false);
+    setShowCorrect(false);
 
     setTimeout(() => {
       setShowExtraPoints(false);
-      setTimer(30);
-      setShowCorrect(false);
     }, 300);
 
     setTimeout(() => {
       setRound((prevRound) => prevRound + 1);
     }, 500);
   };
+
+  const endQuiz = () => {
+    setGame(GameState[2]);
+  };
+
+  if (timer <= 0) nextQuestion();
+
+  if (round >= 8) setRound(0), setGame(GameState[2]);
 
   // Se rendizan los buttons de seleccion de idioma cuando este es undefined
   if (game === GameState[0])
@@ -117,12 +111,18 @@ function App() {
           />
 
           {showCorrect ? (
-            <button
-              className={style.confirmButton}
-              onClick={() => nextQuestion()}
-            >
-              {lang ? "Siguiente Pregunta" : "Next Question"}
-            </button>
+            round === 7 ? (
+              <button className={style.confirmButton} onClick={() => endQuiz()}>
+                {lang ? "Finalizar Quiz" : "Finish Quiz"}
+              </button>
+            ) : (
+              <button
+                className={style.confirmButton}
+                onClick={() => nextQuestion()}
+              >
+                {lang ? "Siguiente Pregunta" : "Next Question"}
+              </button>
+            )
           ) : (
             <button onClick={() => confirm()} className={style.confirmButton}>
               {lang ? "Confirmar y Continuar" : "Confirm and Continue"}
@@ -132,25 +132,26 @@ function App() {
             showCorrect={showCorrect}
             duration={timer}
             setTimer={setTimer}
-            onComplete={() => confirm()}
+            confirm={() => confirm()}
+            nextQuestion={() => nextQuestion()}
           />
         </main>
       </>
     );
 
-    if(game === GameState[2])
-      return (
-    <>
-    <header>
-    <h1 className={style.title}>
+  if (game === GameState[2])
+    return (
+      <>
+        <header>
+          <h1 className={style.title}>
             Dev<span>Quiz</span> Challenge
           </h1>
-    </header>
-    <main>
-
-    </main>
-    </>
-      )
+        </header>
+        <main>
+          <Form lang={lang} score={score} />
+        </main>
+      </>
+    );
 }
 
 export default App;
