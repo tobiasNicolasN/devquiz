@@ -4,7 +4,7 @@
   padding: 10px;
   justify-content: center;
   gap: 2rem;
-  width: 85%;
+  width: 80%;
 }
 
 .languageButton {
@@ -28,4 +28,28 @@
 
 .selected {
     border-color: #007bff;
+}
+
+@media (min-width: 768px) {
+  .selectLanguage{
+    width: 65%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .selectLanguage{
+    width: 60%;
+  }
+}
+
+@media (min-width: 1280) {
+  .selectLanguage{
+    width: 55%;
+  }
+}
+
+@media (min-width: 1536px) {
+  .selectLanguage{
+    width: 45%;
+  }
 }

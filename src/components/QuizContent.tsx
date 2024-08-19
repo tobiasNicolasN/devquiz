@@ -1,7 +1,6 @@
-import { IQuiz, IQuizContentProps } from "../interfaces/types";
+import { useData } from "../context/DataContext";
+import { IQuestions, IQuizContentProps } from "../interfaces/types";
 import style from "../styles/QuizContent.module.css";
-import dataEs from "../../data.es.json";
-import dataEn from "../../data.en.json";
 import { useEffect, useState } from "react";
 
 function QuizContent({
@@ -13,13 +12,28 @@ function QuizContent({
   const [selected, setSelected] = useState<number | undefined>(undefined);
   const [questionsUsed, setQuestionsUsed] = useState<number[]>([]);
   const [question, setQuestion] = useState<number>();
-  // const [changeAnimation, setChangeAnimation] = useState<boolean>(false);
-  const data: IQuiz[] = lang ? dataEs : dataEn;
+  const [questionsES, setQuestionsES] = useState<IQuestions[]>([]);
+  const [questionsEN, setQuestionsEN] = useState<IQuestions[]>([]);
+  const { questions, responses } = useData();
+  const data: IQuestions[] = lang ? questionsES : questionsEN;
 
   // Función para generar un número aleatorio dentro del rango dado
   const randomNumber = (max: number) => {
     return Math.floor(Math.random() * max + 1);
   };
+
+  // Filtra las preguntas en ingles y español
+  const filterData = (data: IQuestions[]) => {
+    data.map((question) => {
+      question.language === "es"
+        ? setQuestionsES((prevQuestionsES) => [...prevQuestionsES, question])
+        : setQuestionsEN((prevQuestionsEN) => [...prevQuestionsEN, question]);
+    });
+  };
+
+  useEffect(() => {
+    filterData(questions);
+  }, []);
 
   // Setea una pregunta random
   useEffect(() => {
@@ -44,28 +58,29 @@ function QuizContent({
     <div className={style.quizContainer}>
       {question !== undefined ? (
         <>
-          <p className={style.question}>{data[question].question}</p>
+          <p className={style.question}>{data[question].question_text}</p>
           <div className={style.responsesContainer}>
-            {data[question].responses.map((res, index) => {
-              return (
-                <div
-                  className={`${style.responseCard} ${
-                    selected === index ? style.selected : ""
-                  } ${
-                    showCorrect === true
-                      ? res.correct === true
-                        ? style.responseTrue
-                        : style.responseFalse
-                      : ""
-                  }`}
-                  onClick={() => {
-                    setSelected(index), setResponse(res.correct);
-                  }}
-                  key={index}
-                >
-                  <p className={style.response}>{res.response}</p>
-                </div>
-              );
+            {responses.map((res, index) => {
+              if (res.question_id === data[question].id)
+                return (
+                  <div
+                    className={`${style.responseCard} ${
+                      selected === index ? style.selected : ""
+                    } ${
+                      showCorrect === true
+                        ? res.correct === true
+                          ? style.responseTrue
+                          : style.responseFalse
+                        : ""
+                    }`}
+                    onClick={() => {
+                      setSelected(index), setResponse(res.correct);
+                    }}
+                    key={index}
+                  >
+                    <p className={style.response}>{res.response_text}</p>
+                  </div>
+                );
             })}
           </div>
         </>

@@ -11,8 +11,7 @@ const TimerBar = ({
   useEffect(() => {
     if (!showCorrect) {
       if (duration <= 0) {
-        if (confirm) confirm();
-        return;
+        confirm();
       }
 
       const intervalId = setInterval(() => {
@@ -21,7 +20,7 @@ const TimerBar = ({
 
       return () => clearInterval(intervalId);
     }
-  }, [duration, showCorrect]);
+  }, [duration,showCorrect]);
 
   useEffect(() => {
     const intervalId = setInterval(() => {

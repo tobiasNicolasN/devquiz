@@ -1,17 +1,11 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { IFormData, IFormProps } from "../interfaces/types";
+import { sendScoreData } from "../api/api";
+import style from '../styles/Form.module.css'
+import Button from "./Button";
 
-interface IFormProps {
-  score: number;
-  lang: boolean;
-}
-
-interface IFormData {
-  score: number;
-  name: string;
-}
-
-function Form({ score, lang }: IFormProps) {
+function Form({ score, lang, setSended }: IFormProps) {
   const { register, handleSubmit, setValue } = useForm<IFormData>();
 
   useEffect(() => {
@@ -19,21 +13,24 @@ function Form({ score, lang }: IFormProps) {
   }, []);
 
   const onSubmit = (data: IFormData) => {
-    console.log(data);
+    sendScoreData(data);
+    setSended(true)
   };
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <p>
+    <form className={style.form} onSubmit={handleSubmit(onSubmit)}>
+      <p className={style.formText}>
         {lang
-          ? `Tu puntaje ha sido de ${score}. ¡Sube tu puntaje para asegurar tu lugar en la tabla de posiciones!`
-          : `Your score is ${score}. Upload your score to secure your place on the leaderboard!`}
+          ? `¡Gracias por participar! Tu puntaje ha sido de ${score}. ¡Sube tu puntaje para asegurar tu lugar en la tabla de posiciones!`
+          : `Thank you for participating! Your score has been ${score}. Increase your score to secure your place on the leaderboard!`}
       </p>
       <input
+        className={style.input}
         type="text"
         placeholder={lang ? "Nombre" : "Name"}
         {...register("name", { required: true })}
       />
-      <button>{lang ? "Subir Puntaje" : "Submit Score"}</button>
+      <Button type="submit">{lang ? "Subir Puntaje" : "Submit Score"}</Button>
     </form>
   );
 }

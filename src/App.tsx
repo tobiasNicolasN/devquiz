@@ -1,10 +1,15 @@
 import style from "./App.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import QuizContent from "./components/QuizContent";
 import TimeBar from "./components/TimeBar";
-import { GameState, Language } from "./interfaces/types";
+import { GameState, IScores, Language } from "./interfaces/types";
 import LangButtons from "./components/LangButtons";
 import Form from "./components/Form";
+import { getQuestions, getResponses, getScores } from "./api/api";
+import { useData } from "./context/DataContext";
+import LeaderBoard from "./components/LeaderBoard";
+import Button from "./components/Button";
+import Header from "./components/Header";
 
 function App() {
   const [game, setGame] = useState<string>(GameState[0]);
@@ -17,8 +22,25 @@ function App() {
   const [round, setRound] = useState<number>(1);
   const [timer, setTimer] = useState<number>(30);
   const [showCorrect, setShowCorrect] = useState<boolean>(false);
-
+  const [loadingData, setLoadingData] = useState<boolean>(true);
+  const [scores, setScores] = useState<IScores[]>([]);
+  const [sended, setSended] = useState<boolean>(false);
+  const { setQuestions, setResponses } = useData();
   const lang = language === Language[0];
+
+  const loadData = async () => {
+    const questionsRes = await getQuestions();
+    const responsesRes = await getResponses();
+    const scoresRes = await getScores();
+    setScores(scoresRes);
+    setResponses(responsesRes);
+    setQuestions(questionsRes);
+    setLoadingData(false);
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
 
   const confirm = () => {
     setShowCorrect(true);
@@ -55,53 +77,58 @@ function App() {
 
   if (timer <= 0) nextQuestion();
 
+  // Finaliza el game cuando se pasa la ronda final
   if (round >= 8) setRound(0), setGame(GameState[2]);
 
-  // Se rendizan los buttons de seleccion de idioma cuando este es undefined
+  // Inicio
   if (game === GameState[0])
     return (
       <>
-        <header>
-          <h1 className={style.title}>
-            Dev<span>Quiz</span> Challenge
-          </h1>
-          <main>
-            <p className={style.textIntro}>
-              {lang
-                ? "Poné a prueba tus conocimientos en desarrollo web con este quiz interactivo. Responde preguntas sobre TypeScript, JavaScript, React, HTML, CSS y más. ¡Desafiá tu mente y mejorá tus habilidades mientras te divertís!"
-                : "Test your web development knowledge with this interactive quiz. Answer questions on TypeScript, JavaScript, React, HTML, CSS, and more. Challenge your mind and improve your skills while having fun!"}
-            </p>
-            <LangButtons lang={lang} setLanguage={setLanguage} />
-            <button
-              className={style.startButton}
+        <Header
+          game={game}
+          loadingData={loadingData}
+          lang={lang}
+          timesPlayed={scores.length}
+          extraPoints={extraPoints}
+          round={round}
+          score={score}
+          showExtraPoints={showExtraPoints}
+          visible={visible}
+        />
+        <main>
+          <p className={style.textIntro}>
+            {lang
+              ? "Poné a prueba tus conocimientos en desarrollo web con este quiz interactivo. Responde preguntas sobre TypeScript, JavaScript, React, HTML, CSS y más. ¡Desafiá tu mente y mejorá tus habilidades mientras te divertís!"
+              : "Test your web development knowledge with this interactive quiz. Answer questions on TypeScript, JavaScript, React, HTML, CSS, and more. Challenge your mind and improve your skills while having fun!"}
+          </p>
+          <LangButtons lang={lang} setLanguage={setLanguage} />
+          <div className={style.buttonContainer}>
+            <Button
+              disabled={loadingData}
               onClick={() => setGame(GameState[1])}
             >
-              {lang ? "Comenzar" : "Start"}
-            </button>
-          </main>
-        </header>
+              {loadingData ? ". . ." : lang ? "Comenzar" : "Start"}
+            </Button>
+          </div>
+        </main>
       </>
     );
 
+  // In game
   if (game === GameState[1])
     return (
       <>
-        <header>
-          <h1 className={style.title}>
-            Dev<span>Quiz</span> Challenge
-          </h1>
-          <h2 className={style.score}>
-            {round}/7 {lang ? "Puntuación: " : "Score: "}
-            <span
-              className={`${style.extraPoints} ${
-                visible ? style.showExtraPoints : ""
-              }`}
-            >
-              {showExtraPoints ? `+ ${extraPoints}` : ""}
-            </span>
-            <span>{score}</span>
-          </h2>
-        </header>
+        <Header
+          game={game}
+          loadingData={loadingData}
+          lang={lang}
+          timesPlayed={scores.length}
+          extraPoints={extraPoints}
+          round={round}
+          score={score}
+          showExtraPoints={showExtraPoints}
+          visible={visible}
+        />
         <main>
           <QuizContent
             round={round}
@@ -109,7 +136,6 @@ function App() {
             setResponse={setResponse}
             showCorrect={showCorrect}
           />
-
           {showCorrect ? (
             round === 7 ? (
               <button className={style.confirmButton} onClick={() => endQuiz()}>
@@ -124,7 +150,7 @@ function App() {
               </button>
             )
           ) : (
-            <button onClick={() => confirm()} className={style.confirmButton}>
+            <button className={style.confirmButton} onClick={() => confirm()}>
               {lang ? "Confirmar y Continuar" : "Confirm and Continue"}
             </button>
           )}
@@ -139,16 +165,27 @@ function App() {
       </>
     );
 
+  // Despues del game
   if (game === GameState[2])
     return (
       <>
-        <header>
-          <h1 className={style.title}>
-            Dev<span>Quiz</span> Challenge
-          </h1>
-        </header>
+        <Header
+          game={game}
+          loadingData={loadingData}
+          lang={lang}
+          timesPlayed={scores.length}
+          extraPoints={extraPoints}
+          round={round}
+          score={score}
+          showExtraPoints={showExtraPoints}
+          visible={visible}
+        />
         <main>
-          <Form lang={lang} score={score} />
+          {sended ? (
+            <LeaderBoard scores={scores} setScores={setScores} />
+          ) : (
+            <Form lang={lang} score={score} setSended={setSended} />
+          )}
         </main>
       </>
     );

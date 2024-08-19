@@ -5,14 +5,14 @@
   justify-content: center;
   gap: 10px;
   margin-top: 50px;
-  width: 85%;
+  width: 80%;
   color: #111827;
 }
 
 .question {
   text-align: left;
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 500;
   margin-bottom: 10px;
 }
 
@@ -51,4 +51,28 @@
 
 .responseFalse {
   background: #ff000086;
+}
+
+@media (min-width: 768px) {
+  .quizContainer{
+    width: 65%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .quizContainer{
+    width: 60%;
+  }
+}
+
+@media (min-width: 1280) {
+  .quizContainer{
+    width: 55%;
+  }
+}
+
+@media (min-width: 1536px) {
+  .quizContainer{
+    width: 45%;
+  }
 }
