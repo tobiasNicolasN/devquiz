@@ -4,14 +4,13 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const sendScoreData = async (data: IFormData) => {
   try {
-    const res = await fetch(`${BASE_URL}/scores`, {
+    await fetch(`${BASE_URL}/scores`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     });
-    console.log(res);
   } catch (error) {
     console.error(error);
   }

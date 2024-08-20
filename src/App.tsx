@@ -10,6 +10,7 @@ import { useData } from "./context/DataContext";
 import LeaderBoard from "./components/LeaderBoard";
 import Button from "./components/Button";
 import Header from "./components/Header";
+import Spinner from "./components/Spinner";
 
 function App() {
   const [game, setGame] = useState<string>(GameState[0]);
@@ -75,8 +76,6 @@ function App() {
     setGame(GameState[2]);
   };
 
-  if (timer <= 0) nextQuestion();
-
   // Finaliza el game cuando se pasa la ronda final
   if (round >= 8) setRound(0), setGame(GameState[2]);
 
@@ -107,7 +106,13 @@ function App() {
               disabled={loadingData}
               onClick={() => setGame(GameState[1])}
             >
-              {loadingData ? ". . ." : lang ? "Comenzar" : "Start"}
+              {loadingData ? (
+                <Spinner width={"0.8rem"} />
+              ) : lang ? (
+                "Comenzar"
+              ) : (
+                "Start"
+              )}
             </Button>
           </div>
         </main>
@@ -158,8 +163,8 @@ function App() {
             showCorrect={showCorrect}
             duration={timer}
             setTimer={setTimer}
-            confirm={() => confirm()}
-            nextQuestion={() => nextQuestion()}
+            confirm={confirm}
+            nextQuestion={nextQuestion}
           />
         </main>
       </>
@@ -182,7 +187,7 @@ function App() {
         />
         <main>
           {sended ? (
-            <LeaderBoard scores={scores} setScores={setScores} />
+            <LeaderBoard scores={scores} setScores={setScores} lang={lang} />
           ) : (
             <Form lang={lang} score={score} setSended={setSended} />
           )}

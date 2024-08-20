@@ -44,13 +44,8 @@ main {
   margin-top: 50px;
   text-align: left;
   font-size: 1.2rem;
-  font-weight: 500;
   width: 80%;
   margin-bottom: 10px;
-}
-
-.svg{
-  width: 1rem;
 }
 
 @media (min-width: 768px) {

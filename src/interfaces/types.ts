@@ -76,4 +76,5 @@ export interface IFormData {
 export interface ILeaderBoard {
   scores: IScores[]
   setScores: Dispatch<SetStateAction<IScores[]>>
+  lang: boolean
 }

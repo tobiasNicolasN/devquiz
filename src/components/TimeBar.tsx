@@ -7,6 +7,7 @@ const TimerBar = ({
   duration,
   setTimer,
   confirm,
+  nextQuestion
 }: ITimeBarProps) => {
   useEffect(() => {
     if (!showCorrect) {
@@ -20,14 +21,18 @@ const TimerBar = ({
 
       return () => clearInterval(intervalId);
     }
-  }, [duration,showCorrect]);
+  }, [duration, showCorrect]);
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setTimer((prev) => prev - 1);
-    }, 1000);
-
-    return () => clearInterval(intervalId);
+    if (showCorrect) {
+      if (duration <= 0) {
+        nextQuestion();
+      }
+      const intervalId = setInterval(() => {
+        setTimer((prev) => prev - 1);
+      }, 1000);
+      return () => clearInterval(intervalId);
+    }
   }, [duration]);
 
   const barDuration = showCorrect ? 10 : 30;

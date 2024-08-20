@@ -2,11 +2,16 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { IFormData, IFormProps } from "../interfaces/types";
 import { sendScoreData } from "../api/api";
-import style from '../styles/Form.module.css'
+import style from "../styles/Form.module.css";
 import Button from "./Button";
 
 function Form({ score, lang, setSended }: IFormProps) {
-  const { register, handleSubmit, setValue } = useForm<IFormData>();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm<IFormData>();
 
   useEffect(() => {
     setValue("score", score);
@@ -14,7 +19,7 @@ function Form({ score, lang, setSended }: IFormProps) {
 
   const onSubmit = (data: IFormData) => {
     sendScoreData(data);
-    setSended(true)
+    setSended(true);
   };
 
   return (
@@ -28,9 +33,23 @@ function Form({ score, lang, setSended }: IFormProps) {
         className={style.input}
         type="text"
         placeholder={lang ? "Nombre" : "Name"}
-        {...register("name", { required: true })}
-      />
+        autoComplete="off"
+        {...register("name", {
+          required: lang ? "Nombre requerido" : "Name required",
+          pattern: {
+            value: /^[A-Za-z\s]+$/,
+            message: lang
+            ? "Solo se permiten letras"
+            : "Only letters are allowed",
+          },
+          maxLength: {
+            value: 30,
+            message: lang ? "El nombre no puede exceder los 30 caracteres" : "Name cannot exceed 30 characters",
+          },
+        })}
+        />
       <Button type="submit">{lang ? "Subir Puntaje" : "Submit Score"}</Button>
+        {errors.name && <div className={style.error}>{errors.name.message}</div>}
     </form>
   );
 }

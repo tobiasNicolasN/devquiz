@@ -1,56 +1,56 @@
 .container {
-    position: relative;
-    margin-top: 10px;
-    width: 80%;
-    height: 2rem;
-    background-color: #e0e0e0;
-    border-radius: 5px;
-    overflow: hidden;
+  position: relative;
+  margin-top: 10px;
+  width: 80%;
+  height: 2rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #3b82f6;
+  transition: width 1s linear;
+}
+
+.label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 65%;
   }
-  
-  .bar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    background-color: #3b82f6;
-    transition: width 1s linear;
+}
+
+@media (min-width: 1024px) {
+  .container {
+    width: 60%;
   }
-  
-  .label {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #ffffff;
-    font-weight: bold;
-    font-size: 14px;
+}
+
+@media (min-width: 1280) {
+  .container {
+    width: 55%;
   }
-  
-  @media (min-width: 768px) {
-    .container{
-      width: 65%;
-    }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    width: 45%;
   }
-  
-  @media (min-width: 1024px) {
-    .container{
-      width: 60%;
-    }
-  }
-  
-  @media (min-width: 1280) {
-    .container{
-      width: 55%;
-    }
-  }
-  
-  @media (min-width: 1536px) {
-    .container{
-      width: 45%;
-    }
-  }
+}

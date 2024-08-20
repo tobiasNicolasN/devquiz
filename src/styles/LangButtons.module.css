@@ -15,41 +15,40 @@
   color: #111827;
   cursor: pointer;
   font-size: 1rem;
-  font-weight: 600;
   padding: 0.5rem 2rem;
-  transition: all 250ms;    
+  transition: all 250ms;
   width: 100%;
 }
 
-.languageButton:hover {
-    box-shadow: rgba(0, 0, 0, 0.2) 0 4px 12px;
-    transform: translateY(-1px);
-}
-
 .selected {
-    border-color: #007bff;
+  border-color: #007bff;
 }
 
 @media (min-width: 768px) {
-  .selectLanguage{
+  .selectLanguage {
     width: 65%;
   }
 }
 
 @media (min-width: 1024px) {
-  .selectLanguage{
+  .selectLanguage {
     width: 60%;
+  }
+
+  .languageButton:hover {
+    box-shadow: rgba(0, 0, 0, 0.2) 0 4px 12px;
+    transform: translateY(-1px);
   }
 }
 
 @media (min-width: 1280) {
-  .selectLanguage{
+  .selectLanguage {
     width: 55%;
   }
 }
 
 @media (min-width: 1536px) {
-  .selectLanguage{
+  .selectLanguage {
     width: 45%;
   }
 }
