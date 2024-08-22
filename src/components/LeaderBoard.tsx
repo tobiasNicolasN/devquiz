@@ -15,7 +15,7 @@ function LeaderBoard({ scores, setScores, lang }: ILeaderBoard) {
 
   useEffect(() => {
     loadData();
-  }, [[], scores]);
+  }, []);
 
   const capitalizeWords = (string:string) => {
       return string
