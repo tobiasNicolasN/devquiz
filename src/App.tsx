@@ -5,7 +5,7 @@ import TimeBar from "./components/TimeBar";
 import { GameState, IScores, Language } from "./interfaces/types";
 import LangButtons from "./components/LangButtons";
 import Form from "./components/Form";
-import { getQuestions, getResponses, getScores } from "./api/api";
+import { getQuestions, getResponses } from "./api/api";
 import { useData } from "./context/DataContext";
 import LeaderBoard from "./components/LeaderBoard";
 import Button from "./components/Button";
