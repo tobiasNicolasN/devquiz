@@ -32,8 +32,6 @@ function App() {
   const loadData = async () => {
     const questionsRes = await getQuestions();
     const responsesRes = await getResponses();
-    const scoresRes = await getScores();
-    setScores(scoresRes);
     setResponses(responsesRes);
     setQuestions(questionsRes);
     setLoadingData(false);
@@ -115,7 +113,8 @@ function App() {
               )}
             </Button>
           </div>
-        </main>
+              <LeaderBoard scores={scores} setScores={setScores} lang={lang} />
+          </main>
       </>
     );
 
